@@ -29,8 +29,8 @@ public:
 	const std::string &getRawCapabilities();
 
 	value_t readValue(code_t code);
-	void readValue(code_t code, value_t *value, value_t *maximum);
-	void writeValue(code_t code, value_t value);
+	bool readValue(code_t code, value_t *value, value_t *maximum);
+	bool writeValue(code_t code, value_t value);
 private:
 	DeviceImpl *_pImpl;
 };

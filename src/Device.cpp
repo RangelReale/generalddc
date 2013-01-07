@@ -33,18 +33,19 @@ const std::string &Device::getRawCapabilities()
 value_t Device::readValue(code_t code)
 {
 	value_t value;
-	_pImpl->readValue(code, &value, NULL);
+	if (!_pImpl->readValue(code, &value, NULL))
+		throw Exception("Error reading value");
 	return value;
 }
 
-void Device::readValue(code_t code, value_t *value, value_t *maximum)
+bool Device::readValue(code_t code, value_t *value, value_t *maximum)
 {
-	_pImpl->readValue(code, value, maximum);
+	return _pImpl->readValue(code, value, maximum);
 }
 
-void Device::writeValue(code_t code, value_t value)
+bool Device::writeValue(code_t code, value_t value)
 {
-	_pImpl->writeValue(code, value);
+	return _pImpl->writeValue(code, value);
 }
 
 

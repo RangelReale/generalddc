@@ -150,16 +150,14 @@ const std::string &DeviceImpl::getRawCapabilities()
 	return _caps;
 }
 
-void DeviceImpl::readValue(code_t code, value_t *value, value_t *maximum)
+bool DeviceImpl::readValue(code_t code, value_t *value, value_t *maximum)
 {
-	if (!GetVCPFeatureAndVCPFeatureReply(_pmonitor->getHandleAt(_pmonitorindex)->hPhysicalMonitor, code, NULL, value, maximum))
-		throw Exception("Could not read value");
+	return GetVCPFeatureAndVCPFeatureReply(_pmonitor->getHandleAt(_pmonitorindex)->hPhysicalMonitor, code, NULL, value, maximum)?true:false;
 }
 
-void DeviceImpl::writeValue(code_t code, value_t value)
+bool DeviceImpl::writeValue(code_t code, value_t value)
 {
-	if (!SetVCPFeature(_pmonitor->getHandleAt(_pmonitorindex)->hPhysicalMonitor, code, value))
-		throw Exception("Could not write value");
+	return SetVCPFeature(_pmonitor->getHandleAt(_pmonitorindex)->hPhysicalMonitor, code, value)?true:false;
 }
 
 BOOL CALLBACK MonitorEnumProc(

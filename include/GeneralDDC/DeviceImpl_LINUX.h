@@ -23,8 +23,8 @@ public:
 	const std::string &getEDID();
 	const std::string &getRawCapabilities();
 
-	void readValue(code_t code, value_t *value, value_t *maximum);
-	void writeValue(code_t code, value_t value);
+	bool readValue(code_t code, value_t *value, value_t *maximum);
+	bool writeValue(code_t code, value_t value);
 
 	static void probe(List &list);
 private:

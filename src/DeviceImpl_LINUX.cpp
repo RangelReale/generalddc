@@ -128,21 +128,22 @@ void DeviceImpl::probe(List &list)
 	closedir(dirp);
 }
 
-void DeviceImpl::readValue(code_t code, value_t *value, value_t *maximum)
+bool DeviceImpl::readValue(code_t code, value_t *value, value_t *maximum)
 {
 	unsigned short v, m;
 	
 	if (!readctrl(code, &v, &m))
-		throw Exception("Could not read value");
+		return false;
 	
 	if (value) *value = v;
 	if (maximum) *maximum = m;
+
+	return true;
 }
 
-void DeviceImpl::writeValue(code_t code, value_t value)
+bool DeviceImpl::writeValue(code_t code, value_t value)
 {
-	if (!writectrl((unsigned char)code, (unsigned short)value, 0))
-		throw Exception("Could not write value");
+	return writectrl((unsigned char)code, (unsigned short)value, 0);
 }
 
 void DeviceImpl::readEDID()
