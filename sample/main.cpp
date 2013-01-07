@@ -18,6 +18,11 @@ int main(int argc, char* argv[])
 			std::cout << "POWER ERROR=" << e.what() << std::endl;
 		}
 		try{
+		std::cout << "STANDBY=" << list.at(i)->readValue(GeneralDDC::Device::STANDBY) << std::endl;
+		} catch (GeneralDDC::Exception &e) {
+			std::cout << "STANDBY ERROR=" << e.what() << std::endl;
+		}
+		try{
 		std::cout << "INPUT SOURCE=" << list.at(i)->readValue(GeneralDDC::Device::INPUT_SOURCE) << std::endl;
 		} catch (GeneralDDC::Exception &e) {
 			std::cout << "INPUT SOURCE ERROR=" << e.what() << std::endl;
